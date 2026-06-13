@@ -18,6 +18,7 @@ import { Route as EarningsRefundsRouteImport } from './routes/earnings.refunds'
 import { Route as EarningsPenaltiesRouteImport } from './routes/earnings.penalties'
 import { Route as EarningsPayoutsRouteImport } from './routes/earnings.payouts'
 import { Route as EarningsPaymentsRouteImport } from './routes/earnings.payments'
+import { Route as EarningsLedgerRouteImport } from './routes/earnings.ledger'
 import { Route as EarningsIncentivesRouteImport } from './routes/earnings.incentives'
 import { Route as EarningsGstRouteImport } from './routes/earnings.gst'
 import { Route as EarningsCouponsRouteImport } from './routes/earnings.coupons'
@@ -71,6 +72,11 @@ const EarningsPaymentsRoute = EarningsPaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => EarningsRoute,
 } as any)
+const EarningsLedgerRoute = EarningsLedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => EarningsRoute,
+} as any)
 const EarningsIncentivesRoute = EarningsIncentivesRouteImport.update({
   id: '/incentives',
   path: '/incentives',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/earnings/coupons': typeof EarningsCouponsRoute
   '/earnings/gst': typeof EarningsGstRoute
   '/earnings/incentives': typeof EarningsIncentivesRoute
+  '/earnings/ledger': typeof EarningsLedgerRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
   '/earnings/penalties': typeof EarningsPenaltiesRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/earnings/coupons': typeof EarningsCouponsRoute
   '/earnings/gst': typeof EarningsGstRoute
   '/earnings/incentives': typeof EarningsIncentivesRoute
+  '/earnings/ledger': typeof EarningsLedgerRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
   '/earnings/penalties': typeof EarningsPenaltiesRoute
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/earnings/coupons': typeof EarningsCouponsRoute
   '/earnings/gst': typeof EarningsGstRoute
   '/earnings/incentives': typeof EarningsIncentivesRoute
+  '/earnings/ledger': typeof EarningsLedgerRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
   '/earnings/penalties': typeof EarningsPenaltiesRoute
@@ -172,6 +181,7 @@ export interface FileRouteTypes {
     | '/earnings/coupons'
     | '/earnings/gst'
     | '/earnings/incentives'
+    | '/earnings/ledger'
     | '/earnings/payments'
     | '/earnings/payouts'
     | '/earnings/penalties'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/earnings/coupons'
     | '/earnings/gst'
     | '/earnings/incentives'
+    | '/earnings/ledger'
     | '/earnings/payments'
     | '/earnings/payouts'
     | '/earnings/penalties'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/earnings/coupons'
     | '/earnings/gst'
     | '/earnings/incentives'
+    | '/earnings/ledger'
     | '/earnings/payments'
     | '/earnings/payouts'
     | '/earnings/penalties'
@@ -287,6 +299,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EarningsPaymentsRouteImport
       parentRoute: typeof EarningsRoute
     }
+    '/earnings/ledger': {
+      id: '/earnings/ledger'
+      path: '/ledger'
+      fullPath: '/earnings/ledger'
+      preLoaderRoute: typeof EarningsLedgerRouteImport
+      parentRoute: typeof EarningsRoute
+    }
     '/earnings/incentives': {
       id: '/earnings/incentives'
       path: '/incentives'
@@ -357,6 +376,7 @@ interface EarningsRouteChildren {
   EarningsCouponsRoute: typeof EarningsCouponsRoute
   EarningsGstRoute: typeof EarningsGstRoute
   EarningsIncentivesRoute: typeof EarningsIncentivesRoute
+  EarningsLedgerRoute: typeof EarningsLedgerRoute
   EarningsPaymentsRoute: typeof EarningsPaymentsRoute
   EarningsPayoutsRoute: typeof EarningsPayoutsRoute
   EarningsPenaltiesRoute: typeof EarningsPenaltiesRoute
@@ -373,6 +393,7 @@ const EarningsRouteChildren: EarningsRouteChildren = {
   EarningsCouponsRoute: EarningsCouponsRoute,
   EarningsGstRoute: EarningsGstRoute,
   EarningsIncentivesRoute: EarningsIncentivesRoute,
+  EarningsLedgerRoute: EarningsLedgerRoute,
   EarningsPaymentsRoute: EarningsPaymentsRoute,
   EarningsPayoutsRoute: EarningsPayoutsRoute,
   EarningsPenaltiesRoute: EarningsPenaltiesRoute,
