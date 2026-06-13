@@ -13,6 +13,7 @@ import { Route as EarningsRouteImport } from './routes/earnings'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EarningsIndexRouteImport } from './routes/earnings.index'
 import { Route as EarningsWalletsRouteImport } from './routes/earnings.wallets'
+import { Route as EarningsSettlementsRouteImport } from './routes/earnings.settlements'
 import { Route as EarningsCommissionsRouteImport } from './routes/earnings.commissions'
 import { Route as EarningsBookingsRouteImport } from './routes/earnings.bookings'
 import { Route as EarningsBookingsIdRouteImport } from './routes/earnings.bookings.$id'
@@ -37,6 +38,11 @@ const EarningsWalletsRoute = EarningsWalletsRouteImport.update({
   path: '/wallets',
   getParentRoute: () => EarningsRoute,
 } as any)
+const EarningsSettlementsRoute = EarningsSettlementsRouteImport.update({
+  id: '/settlements',
+  path: '/settlements',
+  getParentRoute: () => EarningsRoute,
+} as any)
 const EarningsCommissionsRoute = EarningsCommissionsRouteImport.update({
   id: '/commissions',
   path: '/commissions',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/earnings': typeof EarningsRouteWithChildren
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
+  '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings/': typeof EarningsIndexRoute
   '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
+  '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings': typeof EarningsIndexRoute
   '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/earnings': typeof EarningsRouteWithChildren
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
+  '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings/': typeof EarningsIndexRoute
   '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/earnings'
     | '/earnings/bookings'
     | '/earnings/commissions'
+    | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings/'
     | '/earnings/bookings/$id'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/earnings/bookings'
     | '/earnings/commissions'
+    | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings'
     | '/earnings/bookings/$id'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '/earnings'
     | '/earnings/bookings'
     | '/earnings/commissions'
+    | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings/'
     | '/earnings/bookings/$id'
@@ -144,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EarningsWalletsRouteImport
       parentRoute: typeof EarningsRoute
     }
+    '/earnings/settlements': {
+      id: '/earnings/settlements'
+      path: '/settlements'
+      fullPath: '/earnings/settlements'
+      preLoaderRoute: typeof EarningsSettlementsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
     '/earnings/commissions': {
       id: '/earnings/commissions'
       path: '/commissions'
@@ -182,6 +201,7 @@ const EarningsBookingsRouteWithChildren =
 interface EarningsRouteChildren {
   EarningsBookingsRoute: typeof EarningsBookingsRouteWithChildren
   EarningsCommissionsRoute: typeof EarningsCommissionsRoute
+  EarningsSettlementsRoute: typeof EarningsSettlementsRoute
   EarningsWalletsRoute: typeof EarningsWalletsRoute
   EarningsIndexRoute: typeof EarningsIndexRoute
 }
@@ -189,6 +209,7 @@ interface EarningsRouteChildren {
 const EarningsRouteChildren: EarningsRouteChildren = {
   EarningsBookingsRoute: EarningsBookingsRouteWithChildren,
   EarningsCommissionsRoute: EarningsCommissionsRoute,
+  EarningsSettlementsRoute: EarningsSettlementsRoute,
   EarningsWalletsRoute: EarningsWalletsRoute,
   EarningsIndexRoute: EarningsIndexRoute,
 }
