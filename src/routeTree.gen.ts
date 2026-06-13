@@ -19,6 +19,7 @@ import { Route as EarningsPenaltiesRouteImport } from './routes/earnings.penalti
 import { Route as EarningsPayoutsRouteImport } from './routes/earnings.payouts'
 import { Route as EarningsPaymentsRouteImport } from './routes/earnings.payments'
 import { Route as EarningsIncentivesRouteImport } from './routes/earnings.incentives'
+import { Route as EarningsGstRouteImport } from './routes/earnings.gst'
 import { Route as EarningsCouponsRouteImport } from './routes/earnings.coupons'
 import { Route as EarningsCommissionsRouteImport } from './routes/earnings.commissions'
 import { Route as EarningsBookingsRouteImport } from './routes/earnings.bookings'
@@ -74,6 +75,11 @@ const EarningsIncentivesRoute = EarningsIncentivesRouteImport.update({
   path: '/incentives',
   getParentRoute: () => EarningsRoute,
 } as any)
+const EarningsGstRoute = EarningsGstRouteImport.update({
+  id: '/gst',
+  path: '/gst',
+  getParentRoute: () => EarningsRoute,
+} as any)
 const EarningsCouponsRoute = EarningsCouponsRouteImport.update({
   id: '/coupons',
   path: '/coupons',
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/coupons': typeof EarningsCouponsRoute
+  '/earnings/gst': typeof EarningsGstRoute
   '/earnings/incentives': typeof EarningsIncentivesRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/coupons': typeof EarningsCouponsRoute
+  '/earnings/gst': typeof EarningsGstRoute
   '/earnings/incentives': typeof EarningsIncentivesRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/coupons': typeof EarningsCouponsRoute
+  '/earnings/gst': typeof EarningsGstRoute
   '/earnings/incentives': typeof EarningsIncentivesRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/earnings/bookings'
     | '/earnings/commissions'
     | '/earnings/coupons'
+    | '/earnings/gst'
     | '/earnings/incentives'
     | '/earnings/payments'
     | '/earnings/payouts'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/earnings/bookings'
     | '/earnings/commissions'
     | '/earnings/coupons'
+    | '/earnings/gst'
     | '/earnings/incentives'
     | '/earnings/payments'
     | '/earnings/payouts'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/earnings/bookings'
     | '/earnings/commissions'
     | '/earnings/coupons'
+    | '/earnings/gst'
     | '/earnings/incentives'
     | '/earnings/payments'
     | '/earnings/payouts'
@@ -270,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EarningsIncentivesRouteImport
       parentRoute: typeof EarningsRoute
     }
+    '/earnings/gst': {
+      id: '/earnings/gst'
+      path: '/gst'
+      fullPath: '/earnings/gst'
+      preLoaderRoute: typeof EarningsGstRouteImport
+      parentRoute: typeof EarningsRoute
+    }
     '/earnings/coupons': {
       id: '/earnings/coupons'
       path: '/coupons'
@@ -316,6 +335,7 @@ interface EarningsRouteChildren {
   EarningsBookingsRoute: typeof EarningsBookingsRouteWithChildren
   EarningsCommissionsRoute: typeof EarningsCommissionsRoute
   EarningsCouponsRoute: typeof EarningsCouponsRoute
+  EarningsGstRoute: typeof EarningsGstRoute
   EarningsIncentivesRoute: typeof EarningsIncentivesRoute
   EarningsPaymentsRoute: typeof EarningsPaymentsRoute
   EarningsPayoutsRoute: typeof EarningsPayoutsRoute
@@ -330,6 +350,7 @@ const EarningsRouteChildren: EarningsRouteChildren = {
   EarningsBookingsRoute: EarningsBookingsRouteWithChildren,
   EarningsCommissionsRoute: EarningsCommissionsRoute,
   EarningsCouponsRoute: EarningsCouponsRoute,
+  EarningsGstRoute: EarningsGstRoute,
   EarningsIncentivesRoute: EarningsIncentivesRoute,
   EarningsPaymentsRoute: EarningsPaymentsRoute,
   EarningsPayoutsRoute: EarningsPayoutsRoute,
