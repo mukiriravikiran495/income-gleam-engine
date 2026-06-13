@@ -23,6 +23,7 @@ import { Route as EarningsGstRouteImport } from './routes/earnings.gst'
 import { Route as EarningsCouponsRouteImport } from './routes/earnings.coupons'
 import { Route as EarningsCommissionsRouteImport } from './routes/earnings.commissions'
 import { Route as EarningsBookingsRouteImport } from './routes/earnings.bookings'
+import { Route as EarningsAnalyticsRouteImport } from './routes/earnings.analytics'
 import { Route as EarningsBookingsIdRouteImport } from './routes/earnings.bookings.$id'
 
 const EarningsRoute = EarningsRouteImport.update({
@@ -95,6 +96,11 @@ const EarningsBookingsRoute = EarningsBookingsRouteImport.update({
   path: '/bookings',
   getParentRoute: () => EarningsRoute,
 } as any)
+const EarningsAnalyticsRoute = EarningsAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => EarningsRoute,
+} as any)
 const EarningsBookingsIdRoute = EarningsBookingsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -104,6 +110,7 @@ const EarningsBookingsIdRoute = EarningsBookingsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/earnings': typeof EarningsRouteWithChildren
+  '/earnings/analytics': typeof EarningsAnalyticsRoute
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/coupons': typeof EarningsCouponsRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/earnings/analytics': typeof EarningsAnalyticsRoute
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/coupons': typeof EarningsCouponsRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/earnings': typeof EarningsRouteWithChildren
+  '/earnings/analytics': typeof EarningsAnalyticsRoute
   '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/coupons': typeof EarningsCouponsRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/earnings'
+    | '/earnings/analytics'
     | '/earnings/bookings'
     | '/earnings/commissions'
     | '/earnings/coupons'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/earnings/analytics'
     | '/earnings/bookings'
     | '/earnings/commissions'
     | '/earnings/coupons'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/earnings'
+    | '/earnings/analytics'
     | '/earnings/bookings'
     | '/earnings/commissions'
     | '/earnings/coupons'
@@ -310,6 +322,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EarningsBookingsRouteImport
       parentRoute: typeof EarningsRoute
     }
+    '/earnings/analytics': {
+      id: '/earnings/analytics'
+      path: '/analytics'
+      fullPath: '/earnings/analytics'
+      preLoaderRoute: typeof EarningsAnalyticsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
     '/earnings/bookings/$id': {
       id: '/earnings/bookings/$id'
       path: '/$id'
@@ -332,6 +351,7 @@ const EarningsBookingsRouteWithChildren =
   EarningsBookingsRoute._addFileChildren(EarningsBookingsRouteChildren)
 
 interface EarningsRouteChildren {
+  EarningsAnalyticsRoute: typeof EarningsAnalyticsRoute
   EarningsBookingsRoute: typeof EarningsBookingsRouteWithChildren
   EarningsCommissionsRoute: typeof EarningsCommissionsRoute
   EarningsCouponsRoute: typeof EarningsCouponsRoute
@@ -347,6 +367,7 @@ interface EarningsRouteChildren {
 }
 
 const EarningsRouteChildren: EarningsRouteChildren = {
+  EarningsAnalyticsRoute: EarningsAnalyticsRoute,
   EarningsBookingsRoute: EarningsBookingsRouteWithChildren,
   EarningsCommissionsRoute: EarningsCommissionsRoute,
   EarningsCouponsRoute: EarningsCouponsRoute,
