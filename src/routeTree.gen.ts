@@ -9,38 +9,252 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as EarningsRouteImport } from './routes/earnings'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EarningsIndexRouteImport } from './routes/earnings.index'
+import { Route as EarningsWalletsRouteImport } from './routes/earnings.wallets'
+import { Route as EarningsSettlementsRouteImport } from './routes/earnings.settlements'
+import { Route as EarningsReportsRouteImport } from './routes/earnings.reports'
+import { Route as EarningsRefundsRouteImport } from './routes/earnings.refunds'
+import { Route as EarningsPenaltiesRouteImport } from './routes/earnings.penalties'
+import { Route as EarningsPayoutsRouteImport } from './routes/earnings.payouts'
+import { Route as EarningsPaymentsRouteImport } from './routes/earnings.payments'
+import { Route as EarningsLedgerRouteImport } from './routes/earnings.ledger'
+import { Route as EarningsIncentivesRouteImport } from './routes/earnings.incentives'
+import { Route as EarningsGstRouteImport } from './routes/earnings.gst'
+import { Route as EarningsCouponsRouteImport } from './routes/earnings.coupons'
+import { Route as EarningsCommissionsRouteImport } from './routes/earnings.commissions'
+import { Route as EarningsBookingsRouteImport } from './routes/earnings.bookings'
+import { Route as EarningsAnalyticsRouteImport } from './routes/earnings.analytics'
+import { Route as EarningsBookingsIdRouteImport } from './routes/earnings.bookings.$id'
 
+const EarningsRoute = EarningsRouteImport.update({
+  id: '/earnings',
+  path: '/earnings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EarningsIndexRoute = EarningsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsWalletsRoute = EarningsWalletsRouteImport.update({
+  id: '/wallets',
+  path: '/wallets',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsSettlementsRoute = EarningsSettlementsRouteImport.update({
+  id: '/settlements',
+  path: '/settlements',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsReportsRoute = EarningsReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsRefundsRoute = EarningsRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsPenaltiesRoute = EarningsPenaltiesRouteImport.update({
+  id: '/penalties',
+  path: '/penalties',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsPayoutsRoute = EarningsPayoutsRouteImport.update({
+  id: '/payouts',
+  path: '/payouts',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsPaymentsRoute = EarningsPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsLedgerRoute = EarningsLedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsIncentivesRoute = EarningsIncentivesRouteImport.update({
+  id: '/incentives',
+  path: '/incentives',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsGstRoute = EarningsGstRouteImport.update({
+  id: '/gst',
+  path: '/gst',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsCouponsRoute = EarningsCouponsRouteImport.update({
+  id: '/coupons',
+  path: '/coupons',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsCommissionsRoute = EarningsCommissionsRouteImport.update({
+  id: '/commissions',
+  path: '/commissions',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsBookingsRoute = EarningsBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsAnalyticsRoute = EarningsAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsBookingsIdRoute = EarningsBookingsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => EarningsBookingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/earnings': typeof EarningsRouteWithChildren
+  '/earnings/analytics': typeof EarningsAnalyticsRoute
+  '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
+  '/earnings/commissions': typeof EarningsCommissionsRoute
+  '/earnings/coupons': typeof EarningsCouponsRoute
+  '/earnings/gst': typeof EarningsGstRoute
+  '/earnings/incentives': typeof EarningsIncentivesRoute
+  '/earnings/ledger': typeof EarningsLedgerRoute
+  '/earnings/payments': typeof EarningsPaymentsRoute
+  '/earnings/payouts': typeof EarningsPayoutsRoute
+  '/earnings/penalties': typeof EarningsPenaltiesRoute
+  '/earnings/refunds': typeof EarningsRefundsRoute
+  '/earnings/reports': typeof EarningsReportsRoute
+  '/earnings/settlements': typeof EarningsSettlementsRoute
+  '/earnings/wallets': typeof EarningsWalletsRoute
+  '/earnings/': typeof EarningsIndexRoute
+  '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/earnings/analytics': typeof EarningsAnalyticsRoute
+  '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
+  '/earnings/commissions': typeof EarningsCommissionsRoute
+  '/earnings/coupons': typeof EarningsCouponsRoute
+  '/earnings/gst': typeof EarningsGstRoute
+  '/earnings/incentives': typeof EarningsIncentivesRoute
+  '/earnings/ledger': typeof EarningsLedgerRoute
+  '/earnings/payments': typeof EarningsPaymentsRoute
+  '/earnings/payouts': typeof EarningsPayoutsRoute
+  '/earnings/penalties': typeof EarningsPenaltiesRoute
+  '/earnings/refunds': typeof EarningsRefundsRoute
+  '/earnings/reports': typeof EarningsReportsRoute
+  '/earnings/settlements': typeof EarningsSettlementsRoute
+  '/earnings/wallets': typeof EarningsWalletsRoute
+  '/earnings': typeof EarningsIndexRoute
+  '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/earnings': typeof EarningsRouteWithChildren
+  '/earnings/analytics': typeof EarningsAnalyticsRoute
+  '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
+  '/earnings/commissions': typeof EarningsCommissionsRoute
+  '/earnings/coupons': typeof EarningsCouponsRoute
+  '/earnings/gst': typeof EarningsGstRoute
+  '/earnings/incentives': typeof EarningsIncentivesRoute
+  '/earnings/ledger': typeof EarningsLedgerRoute
+  '/earnings/payments': typeof EarningsPaymentsRoute
+  '/earnings/payouts': typeof EarningsPayoutsRoute
+  '/earnings/penalties': typeof EarningsPenaltiesRoute
+  '/earnings/refunds': typeof EarningsRefundsRoute
+  '/earnings/reports': typeof EarningsReportsRoute
+  '/earnings/settlements': typeof EarningsSettlementsRoute
+  '/earnings/wallets': typeof EarningsWalletsRoute
+  '/earnings/': typeof EarningsIndexRoute
+  '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/earnings'
+    | '/earnings/analytics'
+    | '/earnings/bookings'
+    | '/earnings/commissions'
+    | '/earnings/coupons'
+    | '/earnings/gst'
+    | '/earnings/incentives'
+    | '/earnings/ledger'
+    | '/earnings/payments'
+    | '/earnings/payouts'
+    | '/earnings/penalties'
+    | '/earnings/refunds'
+    | '/earnings/reports'
+    | '/earnings/settlements'
+    | '/earnings/wallets'
+    | '/earnings/'
+    | '/earnings/bookings/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/earnings/analytics'
+    | '/earnings/bookings'
+    | '/earnings/commissions'
+    | '/earnings/coupons'
+    | '/earnings/gst'
+    | '/earnings/incentives'
+    | '/earnings/ledger'
+    | '/earnings/payments'
+    | '/earnings/payouts'
+    | '/earnings/penalties'
+    | '/earnings/refunds'
+    | '/earnings/reports'
+    | '/earnings/settlements'
+    | '/earnings/wallets'
+    | '/earnings'
+    | '/earnings/bookings/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/earnings'
+    | '/earnings/analytics'
+    | '/earnings/bookings'
+    | '/earnings/commissions'
+    | '/earnings/coupons'
+    | '/earnings/gst'
+    | '/earnings/incentives'
+    | '/earnings/ledger'
+    | '/earnings/payments'
+    | '/earnings/payouts'
+    | '/earnings/penalties'
+    | '/earnings/refunds'
+    | '/earnings/reports'
+    | '/earnings/settlements'
+    | '/earnings/wallets'
+    | '/earnings/'
+    | '/earnings/bookings/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EarningsRoute: typeof EarningsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/earnings': {
+      id: '/earnings'
+      path: '/earnings'
+      fullPath: '/earnings'
+      preLoaderRoute: typeof EarningsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +262,176 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/earnings/': {
+      id: '/earnings/'
+      path: '/'
+      fullPath: '/earnings/'
+      preLoaderRoute: typeof EarningsIndexRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/wallets': {
+      id: '/earnings/wallets'
+      path: '/wallets'
+      fullPath: '/earnings/wallets'
+      preLoaderRoute: typeof EarningsWalletsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/settlements': {
+      id: '/earnings/settlements'
+      path: '/settlements'
+      fullPath: '/earnings/settlements'
+      preLoaderRoute: typeof EarningsSettlementsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/reports': {
+      id: '/earnings/reports'
+      path: '/reports'
+      fullPath: '/earnings/reports'
+      preLoaderRoute: typeof EarningsReportsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/refunds': {
+      id: '/earnings/refunds'
+      path: '/refunds'
+      fullPath: '/earnings/refunds'
+      preLoaderRoute: typeof EarningsRefundsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/penalties': {
+      id: '/earnings/penalties'
+      path: '/penalties'
+      fullPath: '/earnings/penalties'
+      preLoaderRoute: typeof EarningsPenaltiesRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/payouts': {
+      id: '/earnings/payouts'
+      path: '/payouts'
+      fullPath: '/earnings/payouts'
+      preLoaderRoute: typeof EarningsPayoutsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/payments': {
+      id: '/earnings/payments'
+      path: '/payments'
+      fullPath: '/earnings/payments'
+      preLoaderRoute: typeof EarningsPaymentsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/ledger': {
+      id: '/earnings/ledger'
+      path: '/ledger'
+      fullPath: '/earnings/ledger'
+      preLoaderRoute: typeof EarningsLedgerRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/incentives': {
+      id: '/earnings/incentives'
+      path: '/incentives'
+      fullPath: '/earnings/incentives'
+      preLoaderRoute: typeof EarningsIncentivesRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/gst': {
+      id: '/earnings/gst'
+      path: '/gst'
+      fullPath: '/earnings/gst'
+      preLoaderRoute: typeof EarningsGstRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/coupons': {
+      id: '/earnings/coupons'
+      path: '/coupons'
+      fullPath: '/earnings/coupons'
+      preLoaderRoute: typeof EarningsCouponsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/commissions': {
+      id: '/earnings/commissions'
+      path: '/commissions'
+      fullPath: '/earnings/commissions'
+      preLoaderRoute: typeof EarningsCommissionsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/bookings': {
+      id: '/earnings/bookings'
+      path: '/bookings'
+      fullPath: '/earnings/bookings'
+      preLoaderRoute: typeof EarningsBookingsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/analytics': {
+      id: '/earnings/analytics'
+      path: '/analytics'
+      fullPath: '/earnings/analytics'
+      preLoaderRoute: typeof EarningsAnalyticsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/bookings/$id': {
+      id: '/earnings/bookings/$id'
+      path: '/$id'
+      fullPath: '/earnings/bookings/$id'
+      preLoaderRoute: typeof EarningsBookingsIdRouteImport
+      parentRoute: typeof EarningsBookingsRoute
+    }
   }
 }
 
+interface EarningsBookingsRouteChildren {
+  EarningsBookingsIdRoute: typeof EarningsBookingsIdRoute
+}
+
+const EarningsBookingsRouteChildren: EarningsBookingsRouteChildren = {
+  EarningsBookingsIdRoute: EarningsBookingsIdRoute,
+}
+
+const EarningsBookingsRouteWithChildren =
+  EarningsBookingsRoute._addFileChildren(EarningsBookingsRouteChildren)
+
+interface EarningsRouteChildren {
+  EarningsAnalyticsRoute: typeof EarningsAnalyticsRoute
+  EarningsBookingsRoute: typeof EarningsBookingsRouteWithChildren
+  EarningsCommissionsRoute: typeof EarningsCommissionsRoute
+  EarningsCouponsRoute: typeof EarningsCouponsRoute
+  EarningsGstRoute: typeof EarningsGstRoute
+  EarningsIncentivesRoute: typeof EarningsIncentivesRoute
+  EarningsLedgerRoute: typeof EarningsLedgerRoute
+  EarningsPaymentsRoute: typeof EarningsPaymentsRoute
+  EarningsPayoutsRoute: typeof EarningsPayoutsRoute
+  EarningsPenaltiesRoute: typeof EarningsPenaltiesRoute
+  EarningsRefundsRoute: typeof EarningsRefundsRoute
+  EarningsReportsRoute: typeof EarningsReportsRoute
+  EarningsSettlementsRoute: typeof EarningsSettlementsRoute
+  EarningsWalletsRoute: typeof EarningsWalletsRoute
+  EarningsIndexRoute: typeof EarningsIndexRoute
+}
+
+const EarningsRouteChildren: EarningsRouteChildren = {
+  EarningsAnalyticsRoute: EarningsAnalyticsRoute,
+  EarningsBookingsRoute: EarningsBookingsRouteWithChildren,
+  EarningsCommissionsRoute: EarningsCommissionsRoute,
+  EarningsCouponsRoute: EarningsCouponsRoute,
+  EarningsGstRoute: EarningsGstRoute,
+  EarningsIncentivesRoute: EarningsIncentivesRoute,
+  EarningsLedgerRoute: EarningsLedgerRoute,
+  EarningsPaymentsRoute: EarningsPaymentsRoute,
+  EarningsPayoutsRoute: EarningsPayoutsRoute,
+  EarningsPenaltiesRoute: EarningsPenaltiesRoute,
+  EarningsRefundsRoute: EarningsRefundsRoute,
+  EarningsReportsRoute: EarningsReportsRoute,
+  EarningsSettlementsRoute: EarningsSettlementsRoute,
+  EarningsWalletsRoute: EarningsWalletsRoute,
+  EarningsIndexRoute: EarningsIndexRoute,
+}
+
+const EarningsRouteWithChildren = EarningsRoute._addFileChildren(
+  EarningsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EarningsRoute: EarningsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
