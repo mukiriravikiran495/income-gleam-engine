@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EarningsRouteImport } from './routes/earnings'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EarningsIndexRouteImport } from './routes/earnings.index'
 
 const EarningsRoute = EarningsRouteImport.update({
   id: '/earnings',
@@ -22,31 +23,38 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EarningsIndexRoute = EarningsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EarningsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/earnings': typeof EarningsRoute
+  '/earnings': typeof EarningsRouteWithChildren
+  '/earnings/': typeof EarningsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/earnings': typeof EarningsRoute
+  '/earnings': typeof EarningsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/earnings': typeof EarningsRoute
+  '/earnings': typeof EarningsRouteWithChildren
+  '/earnings/': typeof EarningsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/earnings'
+  fullPaths: '/' | '/earnings' | '/earnings/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/earnings'
-  id: '__root__' | '/' | '/earnings'
+  id: '__root__' | '/' | '/earnings' | '/earnings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EarningsRoute: typeof EarningsRoute
+  EarningsRoute: typeof EarningsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +73,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/earnings/': {
+      id: '/earnings/'
+      path: '/'
+      fullPath: '/earnings/'
+      preLoaderRoute: typeof EarningsIndexRouteImport
+      parentRoute: typeof EarningsRoute
+    }
   }
 }
 
+interface EarningsRouteChildren {
+  EarningsIndexRoute: typeof EarningsIndexRoute
+}
+
+const EarningsRouteChildren: EarningsRouteChildren = {
+  EarningsIndexRoute: EarningsIndexRoute,
+}
+
+const EarningsRouteWithChildren = EarningsRoute._addFileChildren(
+  EarningsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EarningsRoute: EarningsRoute,
+  EarningsRoute: EarningsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
