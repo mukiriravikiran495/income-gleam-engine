@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EarningsIndexRouteImport } from './routes/earnings.index'
 import { Route as EarningsWalletsRouteImport } from './routes/earnings.wallets'
 import { Route as EarningsSettlementsRouteImport } from './routes/earnings.settlements'
+import { Route as EarningsRefundsRouteImport } from './routes/earnings.refunds'
 import { Route as EarningsPayoutsRouteImport } from './routes/earnings.payouts'
 import { Route as EarningsPaymentsRouteImport } from './routes/earnings.payments'
 import { Route as EarningsCommissionsRouteImport } from './routes/earnings.commissions'
@@ -43,6 +44,11 @@ const EarningsWalletsRoute = EarningsWalletsRouteImport.update({
 const EarningsSettlementsRoute = EarningsSettlementsRouteImport.update({
   id: '/settlements',
   path: '/settlements',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsRefundsRoute = EarningsRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
   getParentRoute: () => EarningsRoute,
 } as any)
 const EarningsPayoutsRoute = EarningsPayoutsRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
+  '/earnings/refunds': typeof EarningsRefundsRoute
   '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings/': typeof EarningsIndexRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
+  '/earnings/refunds': typeof EarningsRefundsRoute
   '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings': typeof EarningsIndexRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/earnings/commissions': typeof EarningsCommissionsRoute
   '/earnings/payments': typeof EarningsPaymentsRoute
   '/earnings/payouts': typeof EarningsPayoutsRoute
+  '/earnings/refunds': typeof EarningsRefundsRoute
   '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings/': typeof EarningsIndexRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/earnings/commissions'
     | '/earnings/payments'
     | '/earnings/payouts'
+    | '/earnings/refunds'
     | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings/'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/earnings/commissions'
     | '/earnings/payments'
     | '/earnings/payouts'
+    | '/earnings/refunds'
     | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/earnings/commissions'
     | '/earnings/payments'
     | '/earnings/payouts'
+    | '/earnings/refunds'
     | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings/'
@@ -185,6 +197,13 @@ declare module '@tanstack/react-router' {
       path: '/settlements'
       fullPath: '/earnings/settlements'
       preLoaderRoute: typeof EarningsSettlementsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/refunds': {
+      id: '/earnings/refunds'
+      path: '/refunds'
+      fullPath: '/earnings/refunds'
+      preLoaderRoute: typeof EarningsRefundsRouteImport
       parentRoute: typeof EarningsRoute
     }
     '/earnings/payouts': {
@@ -241,6 +260,7 @@ interface EarningsRouteChildren {
   EarningsCommissionsRoute: typeof EarningsCommissionsRoute
   EarningsPaymentsRoute: typeof EarningsPaymentsRoute
   EarningsPayoutsRoute: typeof EarningsPayoutsRoute
+  EarningsRefundsRoute: typeof EarningsRefundsRoute
   EarningsSettlementsRoute: typeof EarningsSettlementsRoute
   EarningsWalletsRoute: typeof EarningsWalletsRoute
   EarningsIndexRoute: typeof EarningsIndexRoute
@@ -251,6 +271,7 @@ const EarningsRouteChildren: EarningsRouteChildren = {
   EarningsCommissionsRoute: EarningsCommissionsRoute,
   EarningsPaymentsRoute: EarningsPaymentsRoute,
   EarningsPayoutsRoute: EarningsPayoutsRoute,
+  EarningsRefundsRoute: EarningsRefundsRoute,
   EarningsSettlementsRoute: EarningsSettlementsRoute,
   EarningsWalletsRoute: EarningsWalletsRoute,
   EarningsIndexRoute: EarningsIndexRoute,
