@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EarningsIndexRouteImport } from './routes/earnings.index'
 import { Route as EarningsWalletsRouteImport } from './routes/earnings.wallets'
 import { Route as EarningsSettlementsRouteImport } from './routes/earnings.settlements'
+import { Route as EarningsReportsRouteImport } from './routes/earnings.reports'
 import { Route as EarningsRefundsRouteImport } from './routes/earnings.refunds'
 import { Route as EarningsPenaltiesRouteImport } from './routes/earnings.penalties'
 import { Route as EarningsPayoutsRouteImport } from './routes/earnings.payouts'
@@ -50,6 +51,11 @@ const EarningsWalletsRoute = EarningsWalletsRouteImport.update({
 const EarningsSettlementsRoute = EarningsSettlementsRouteImport.update({
   id: '/settlements',
   path: '/settlements',
+  getParentRoute: () => EarningsRoute,
+} as any)
+const EarningsReportsRoute = EarningsReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
   getParentRoute: () => EarningsRoute,
 } as any)
 const EarningsRefundsRoute = EarningsRefundsRouteImport.update({
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/earnings/payouts': typeof EarningsPayoutsRoute
   '/earnings/penalties': typeof EarningsPenaltiesRoute
   '/earnings/refunds': typeof EarningsRefundsRoute
+  '/earnings/reports': typeof EarningsReportsRoute
   '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings/': typeof EarningsIndexRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/earnings/payouts': typeof EarningsPayoutsRoute
   '/earnings/penalties': typeof EarningsPenaltiesRoute
   '/earnings/refunds': typeof EarningsRefundsRoute
+  '/earnings/reports': typeof EarningsReportsRoute
   '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings': typeof EarningsIndexRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/earnings/payouts': typeof EarningsPayoutsRoute
   '/earnings/penalties': typeof EarningsPenaltiesRoute
   '/earnings/refunds': typeof EarningsRefundsRoute
+  '/earnings/reports': typeof EarningsReportsRoute
   '/earnings/settlements': typeof EarningsSettlementsRoute
   '/earnings/wallets': typeof EarningsWalletsRoute
   '/earnings/': typeof EarningsIndexRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/earnings/payouts'
     | '/earnings/penalties'
     | '/earnings/refunds'
+    | '/earnings/reports'
     | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings/'
@@ -204,6 +214,7 @@ export interface FileRouteTypes {
     | '/earnings/payouts'
     | '/earnings/penalties'
     | '/earnings/refunds'
+    | '/earnings/reports'
     | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings'
@@ -223,6 +234,7 @@ export interface FileRouteTypes {
     | '/earnings/payouts'
     | '/earnings/penalties'
     | '/earnings/refunds'
+    | '/earnings/reports'
     | '/earnings/settlements'
     | '/earnings/wallets'
     | '/earnings/'
@@ -269,6 +281,13 @@ declare module '@tanstack/react-router' {
       path: '/settlements'
       fullPath: '/earnings/settlements'
       preLoaderRoute: typeof EarningsSettlementsRouteImport
+      parentRoute: typeof EarningsRoute
+    }
+    '/earnings/reports': {
+      id: '/earnings/reports'
+      path: '/reports'
+      fullPath: '/earnings/reports'
+      preLoaderRoute: typeof EarningsReportsRouteImport
       parentRoute: typeof EarningsRoute
     }
     '/earnings/refunds': {
@@ -381,6 +400,7 @@ interface EarningsRouteChildren {
   EarningsPayoutsRoute: typeof EarningsPayoutsRoute
   EarningsPenaltiesRoute: typeof EarningsPenaltiesRoute
   EarningsRefundsRoute: typeof EarningsRefundsRoute
+  EarningsReportsRoute: typeof EarningsReportsRoute
   EarningsSettlementsRoute: typeof EarningsSettlementsRoute
   EarningsWalletsRoute: typeof EarningsWalletsRoute
   EarningsIndexRoute: typeof EarningsIndexRoute
@@ -398,6 +418,7 @@ const EarningsRouteChildren: EarningsRouteChildren = {
   EarningsPayoutsRoute: EarningsPayoutsRoute,
   EarningsPenaltiesRoute: EarningsPenaltiesRoute,
   EarningsRefundsRoute: EarningsRefundsRoute,
+  EarningsReportsRoute: EarningsReportsRoute,
   EarningsSettlementsRoute: EarningsSettlementsRoute,
   EarningsWalletsRoute: EarningsWalletsRoute,
   EarningsIndexRoute: EarningsIndexRoute,
