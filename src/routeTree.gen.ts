@@ -13,6 +13,7 @@ import { Route as EarningsRouteImport } from './routes/earnings'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EarningsIndexRouteImport } from './routes/earnings.index'
 import { Route as EarningsBookingsRouteImport } from './routes/earnings.bookings'
+import { Route as EarningsBookingsIdRouteImport } from './routes/earnings.bookings.$id'
 
 const EarningsRoute = EarningsRouteImport.update({
   id: '/earnings',
@@ -34,31 +35,50 @@ const EarningsBookingsRoute = EarningsBookingsRouteImport.update({
   path: '/bookings',
   getParentRoute: () => EarningsRoute,
 } as any)
+const EarningsBookingsIdRoute = EarningsBookingsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => EarningsBookingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/earnings': typeof EarningsRouteWithChildren
-  '/earnings/bookings': typeof EarningsBookingsRoute
+  '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/': typeof EarningsIndexRoute
+  '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/earnings/bookings': typeof EarningsBookingsRoute
+  '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings': typeof EarningsIndexRoute
+  '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/earnings': typeof EarningsRouteWithChildren
-  '/earnings/bookings': typeof EarningsBookingsRoute
+  '/earnings/bookings': typeof EarningsBookingsRouteWithChildren
   '/earnings/': typeof EarningsIndexRoute
+  '/earnings/bookings/$id': typeof EarningsBookingsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/earnings' | '/earnings/bookings' | '/earnings/'
+  fullPaths:
+    | '/'
+    | '/earnings'
+    | '/earnings/bookings'
+    | '/earnings/'
+    | '/earnings/bookings/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/earnings/bookings' | '/earnings'
-  id: '__root__' | '/' | '/earnings' | '/earnings/bookings' | '/earnings/'
+  to: '/' | '/earnings/bookings' | '/earnings' | '/earnings/bookings/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/earnings'
+    | '/earnings/bookings'
+    | '/earnings/'
+    | '/earnings/bookings/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,16 +116,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EarningsBookingsRouteImport
       parentRoute: typeof EarningsRoute
     }
+    '/earnings/bookings/$id': {
+      id: '/earnings/bookings/$id'
+      path: '/$id'
+      fullPath: '/earnings/bookings/$id'
+      preLoaderRoute: typeof EarningsBookingsIdRouteImport
+      parentRoute: typeof EarningsBookingsRoute
+    }
   }
 }
 
+interface EarningsBookingsRouteChildren {
+  EarningsBookingsIdRoute: typeof EarningsBookingsIdRoute
+}
+
+const EarningsBookingsRouteChildren: EarningsBookingsRouteChildren = {
+  EarningsBookingsIdRoute: EarningsBookingsIdRoute,
+}
+
+const EarningsBookingsRouteWithChildren =
+  EarningsBookingsRoute._addFileChildren(EarningsBookingsRouteChildren)
+
 interface EarningsRouteChildren {
-  EarningsBookingsRoute: typeof EarningsBookingsRoute
+  EarningsBookingsRoute: typeof EarningsBookingsRouteWithChildren
   EarningsIndexRoute: typeof EarningsIndexRoute
 }
 
 const EarningsRouteChildren: EarningsRouteChildren = {
-  EarningsBookingsRoute: EarningsBookingsRoute,
+  EarningsBookingsRoute: EarningsBookingsRouteWithChildren,
   EarningsIndexRoute: EarningsIndexRoute,
 }
 
